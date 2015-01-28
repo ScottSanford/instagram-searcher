@@ -1,0 +1,33 @@
+header {
+	height:300px;
+	background-color:#517fa4;
+}
+
+body {
+	line-height: 20px;
+	color:#222222;
+	background-color: #EDEEEF;
+}
+
+.head-img {
+	margin:150px auto;
+}
+
+.notification {
+	text-align: center;
+	margin-top:25px;
+	font-size:1.2em;
+}
+
+.input-group {
+	width:50%;
+	margin:0 auto;
+}
+
+.input-field {
+	margin-top: 25px;
+}
+
+.btn-success {
+	background-color: #517FA4;
+}
