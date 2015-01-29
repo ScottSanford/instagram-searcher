@@ -9,30 +9,52 @@ angular.module("myApp",[
 	})
 
 	.controller("InstagramSearchController", function($scope, $timeout, $q, $http) {
-		
-	    function wait(fn) {
+
+
+	    function wait() {
+
 	        var defer = $q.defer();
-	        $timeout(fn, 2000);
+
+	        $timeout(function(){
+	        	defer.resolve();}, 2000);
+
 	        return defer.promise;
 	    };
 
+	    $scope.searchInstagram = function() {
+
+	    	var term = $scope.searchTerm;
+
+
+	    	notificationMessage();
+
+	    	getInstagramResults(term);
+	    	
+	    }
+
 	    function notificationMessage() {
+
+	    	var term = $scope.searchTerm;
+
 	    	$scope.notification = true;
-	    	$scope.showNotification = "Searching Instagram for photos tagged with '" + $scope.searchTerm + "'.";
+
+	    	$scope.showNotification = "Searching Instagram for photos tagged with '" + term + "'";
+
 	    	return wait().then(function(){
 	    		$scope.showNotification = "";
 	    	});
+
 	    }
 
+		function getInstagramResults(term) {
 
-		$scope.getInstagramResults = function () {
 
-			$scope.results = null;
+			var url = "https://api.instagram.com/v1/tags/" + term + "/media/recent";
 
-			var url = "https://api.instagram.com/v1/tags/" + $scope.searchTerm + "/media/recent";
 			var request = {
 				callback: 'JSON_CALLBACK', 
-				client_id: 'e5c725b40e6241c9aa94aa318cb50672'
+				client_id: 'e5c725b40e6241c9aa94aa318cb50672', 
+				count: 30
 			};
 
 			$http({
@@ -44,20 +66,20 @@ angular.module("myApp",[
 			.success(function(result){
 
 				notificationMessage().then(function(){
-					$scope.results = result.data;
+	
+					$scope.searchTerm = '';
 
-					console.log(result.data);
-			
-					// var resultLength = $scope.results.length;
+					$scope.results = result.data;
 				
-					// $scope.showNotification = "We found " + resultLength + " result" + $scope.results.length == 1 ? '' : 's for ' + $scope.searchTerm;
+					$scope.showNotification = "We found " + $scope.results.length + " result" + ($scope.results.length == 1 ? '' : 's') +  " for '" + term + "'";
 
 				});
 
 			})
+
 			.error(function(result){
 				notificationMessage().then(function(){
-					$scope.showNotification = "Oops! There was an error searching Instagram :("
+					$scope.showNotification = "Oops! There was an error searching Instagram :(";
 				})
 			})
 		};

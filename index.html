@@ -23,8 +23,8 @@
 			<img src="images/instagram-logo.png" class="img-responsive head-img">
 		</header>
 
-		<form name="instaSearcher" class="input-group input-field" ng-submit="getInstagramResults()">
-			<input name="input" class="form-control" type="text" placeholder="Enter a tag to search" ng-model="searchTerm" required autofocus>
+		<form name="instaSearcher" class="input-group input-field" ng-submit="searchInstagram()">
+			<input name="searchTerm" class="form-control" type="text" placeholder="Enter a tag to search" ng-model="searchTerm" required autofocus>
 			<span class="input-group-btn">
 				<button class="btn btn-success">Search</button>
 			</span>
@@ -33,13 +33,11 @@
 		<div class="notification" ng-show="notification"><em>{{ showNotification }}</em></div>
 
 		<div class="row">
-			<div class="col-sm-4">
-				<div ng-repeat="picture in results">
+				<div ng-repeat="picture in results" class="images col-sm-4 animation">
 					<a href="{{ picture.link }}" target="_blank">
-						<img ng-src="{{ picture.images.low_resolution.url }}" class="thumbnail col-sm-3">  
+						<img ng-src="{{ picture.images.low_resolution.url }}" class="thumbnail img-responsive">  
 					</a>
 				</div>
-			</div>
 		</div>
 
 	</div>

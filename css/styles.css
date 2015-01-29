@@ -20,7 +20,7 @@ body {
 }
 
 .input-group {
-	width:50%;
+	width:450px;
 	margin:0 auto;
 }
 
@@ -30,4 +30,26 @@ body {
 
 .btn-success {
 	background-color: #517FA4;
+	border-color: #517FA4;
+}
+
+.images {
+	margin-top:50px;
+}
+
+img {
+	cursor: pointer;
+}
+
+.animation.ng-enter {
+	transition:.75s;
+	opacity: 0;
+}
+
+.animation.ng-enter-stagger {
+	transition-delay:.1s;
+}
+
+.animation.ng-enter-active {
+	opacity: 1;
 }
