@@ -41,6 +41,10 @@ img {
 	cursor: pointer;
 }
 
+img:hover {
+	border:1px solid #517FA4;
+}
+
 .animation.ng-enter {
 	transition:.75s;
 	opacity: 0;

@@ -21,6 +21,8 @@ angular.module("myApp",[
 	        return defer.promise;
 	    };
 
+	    $scope.wordRegEx = /^\s*\w*\s*$/;
+
 	    $scope.searchInstagram = function() {
 
 	    	var term = $scope.searchTerm;
@@ -66,7 +68,8 @@ angular.module("myApp",[
 			.success(function(result){
 
 				notificationMessage().then(function(){
-	
+
+
 					$scope.searchTerm = '';
 
 					$scope.results = result.data;
