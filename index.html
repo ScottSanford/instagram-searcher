@@ -17,29 +17,37 @@
 
 <body>
 
-	<div class="container-fluid" ng-controller="InstagramSearchController">
+	<div class="container" ng-controller="InstagramSearchCtrl">
 
 		<header class="row"> 
 			<img src="images/instagram-logo.png" class="img-responsive head-img">
 		</header>
 
 		<form name="instaSearcher" class="input-group input-field" ng-submit="searchInstagram()" novalidate>
-			<input name="searchTerm" class="form-control" type="text" placeholder="Enter a tag to search" ng-model="searchTerm" ng-pattern="wordRegEx" required autofocus>
+			<input name="searchTerm" 
+			class="form-control" 
+			type="text" 
+			placeholder="Enter a tag to search" 
+			ng-model="searchTerm" 
+			ng-pattern="/^[a-zA-Z0-9-_]+$/" 
+			required 
+			autofocus>
 			<span class="input-group-btn">
 				<button class="btn btn-success">Search</button>
 			</span>
 		</form>
 
-<!-- 		<div ng-if="instaSearcher.$submitted" ng-messages="instaSearcher.searchTerm.$error">
-			<span ng-message="required" class="error">Please enter a valid hashtag!</span>
-		</div> -->
+		<div ng-if="instaSearcher.$submitted" ng-messages="instaSearcher.searchTerm.$error" ng-hide="errorMessage">
+			<span ng-message="required" class="error">Please fill out the search!</span>
+			<span ng-message="pattern" class="error">Please do not use spaces!</span>
+		</div>
 
 		<div class="notification" ng-show="notification"><em>{{ showNotification }}</em></div>
 
 		<div class="row">
 				<div ng-repeat="picture in results" class="images col-sm-4 animation">
 					<a href="{{ picture.link }}" target="_blank">
-						<img ng-src="{{ picture.images.low_resolution.url }}" class="thumbnail img-responsive">  
+						<img ng-src="{{ picture.images.low_resolution.url }}" class="thumbnail img-responsive center-block">  
 					</a>
 				</div>
 		</div>

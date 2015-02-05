@@ -3,35 +3,34 @@ angular.module("myApp",[
 		'ngAnimate', 
 	])
 
-	.constant('VERSION', 1)
-	.run(function(VERSION, $rootScope){
-		$rootScope = VERSION;
-	})
-
-	.controller("InstagramSearchController", function($scope, $timeout, $q, $http) {
-
+	.controller("InstagramSearchCtrl", function($scope, $timeout, $q, $http) {
 
 	    function wait() {
 
 	        var defer = $q.defer();
 
 	        $timeout(function(){
-	        	defer.resolve();}, 2000);
+	        	defer.resolve();}, 500);
 
 	        return defer.promise;
 	    };
 
-	    $scope.wordRegEx = /^\s*\w*\s*$/;
+
 
 	    $scope.searchInstagram = function() {
 
-	    	var term = $scope.searchTerm;
+	    	$scope.errorMessage = false;
 
+	    	if ($scope.instaSearcher.$valid) {
 
-	    	notificationMessage();
+	    		$scope.errorMessage = true;
 
-	    	getInstagramResults(term);
-	    	
+	    		var term = $scope.searchTerm;
+
+	    		notificationMessage();
+		    	getInstagramResults(term);
+	    		
+	    	}
 	    }
 
 	    function notificationMessage() {
